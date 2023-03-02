@@ -11,7 +11,7 @@
   <meta name="format-detection" content="email=no" />
   <meta name="Keywords" content="离线小助手" />
   <meta name="description" content="离线小助手" />
-  <meta name="author" content="心叶" />
+  <meta name="author" content="cldsx" />
   <link rel="apple-touch-icon" sizes="52x52" href="52icon.png" />
   <link rel="apple-touch-icon" sizes="72x72" href="72icon.png" />
   <link rel="apple-touch-icon" sizes="120x120" href="120icon.png" />
@@ -63,15 +63,15 @@
 worker_processes  1;
 
 #全局错误日志
-error_log   /Users/yelloxing/nginxConfig/error_debug.log  debug;
-error_log   /Users/yelloxing/nginxConfig/error_notice.log  notice;
-error_log   /Users/yelloxing/nginxConfig/error_info.log  info;
-error_log   /Users/yelloxing/nginxConfig/error_warn.log  warn;
-error_log   /Users/yelloxing/nginxConfig/error_error.log  error;
-error_log   /Users/yelloxing/nginxConfig/error_crit.log  crit;
+error_log   /Users/cldsx/nginxConfig/error_debug.log  debug;
+error_log   /Users/cldsx/nginxConfig/error_notice.log  notice;
+error_log   /Users/cldsx/nginxConfig/error_info.log  info;
+error_log   /Users/cldsx/nginxConfig/error_warn.log  warn;
+error_log   /Users/cldsx/nginxConfig/error_error.log  error;
+error_log   /Users/cldsx/nginxConfig/error_crit.log  crit;
 
 #进程文件
-pid       /Users/yelloxing/nginxConfig/nginx.pid;
+pid       /Users/cldsx/nginxConfig/nginx.pid;
 
 events {
     #单个进程最大连接数（最大连接数=连接数*进程数）
@@ -82,7 +82,7 @@ events {
 http {
 
     #文件扩展名与文件类型映射表
-    include      /Users/yelloxing/nginxConfig/mime.types;
+    include      /Users/cldsx/nginxConfig/mime.types;
 
     #默认文件类型
     default_type  application/octet-stream;
@@ -123,11 +123,11 @@ http {
         listen       8080;
         #域名可以有多个，用空格隔开
         server_name  localhost;
-        access_log  /Users/yelloxing/nginxConfig/host.access.log main;
+        access_log  /Users/cldsx/nginxConfig/host.access.log main;
 
         #---1
         location / {
-            root  /Users/yelloxing/-------/source/;
+            root  /Users/cldsx/-------/source/;
             index  index.html;
         }
 
@@ -149,10 +149,10 @@ http {
     server {
         listen       30000;
         server_name  dataServer;
-        access_log  /Users/yelloxing/nginxConfig/data.access.log main;
+        access_log  /Users/cldsx/nginxConfig/data.access.log main;
 
         location ~ (.*\.json) {
-            root   /Users/yelloxing/-------/source/data;
+            root   /Users/cldsx/-------/source/data;
             default_type application/json;
             error_page 405 =200 $1;
         }
