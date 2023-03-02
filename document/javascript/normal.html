@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="../../prettify.css">
     <script src="../../prettify.js"></script>
+   
 </head>
 
 <body onload="prettyPrint()">
@@ -36,7 +37,48 @@
     </header>
     <em class='position'>当前位置：js基础知识</em>
     <section>
+        <div class="title">js中this指向问题</div>
+        <div class="block"> 对象内部方法的this指向调用这些方法的对象，也就是谁调用就指向谁。</div>
+        <pre class="code prettyprint">
+            let obj = {
+                name: "张三",
+                obj1: function () {
+                    name = "李四";
+                    console.log(this.name);
+                },
+                obj2: {
+                    name: "张思",
+                    obj2C: function () {
+                    name = "李武-";
+                    console.log(this.name);
+                    },
+                },
+            };
+            obj.obj1() //张三 this指向obj
+            obj.obj2.obj2C() //张思 obj2C()中this指向obj2
+        </pre>
+
+        <div class="block">箭头函数作用域this不改变上下文</div>
+        <pre class="code prettyprint">
+            var show = () => {
+                console.log(this)
+              }
+              
+              var showObj = {
+                name: 'showshow',
+                show: () => {
+                  console.log(this)
+                },
+                show2:function(){
+                  console.log(this.name)
+                }
+              }
+              show(); //window
+              showObj.show();//window
+              showObj.show2();//showshow
+        </pre>
         
+
     </section>
 
     <footer>
