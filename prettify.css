@@ -19,11 +19,11 @@
 
 
 /* SPAN elements with the classes below are added by prettyprint. */
-.pln { color: #07a }  /* plain text */
+.pln { color: rgb(3, 47, 150) }  /* plain text */
 
 @media screen {
-  .str { color: #800 }  /* string content */
-  .kwd { color: red }  /* a keyword */
+  .str { color: #900 }  /* string content */
+  .kwd { color:  rgb(0, 76, 255) }  /* a keyword */
   .com { color: #080 }  /* a comment */
   .typ { color: #606 }  /* a type name */
   .lit { color: #066 }  /* a literal value */

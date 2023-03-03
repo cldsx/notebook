@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-<head>
-    <meta charset='utf-8'>
+  <head>
+    <meta charset="utf-8" />
     <title>离线小助手</title>
     <link rel="icon" href="../../favicon.ico" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no,maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no,maximum-scale=1"
+    />
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="email=no" />
     <meta name="Keywords" content="离线小助手" />
     <meta name="description" content="离线小助手" />
     <meta name="author" content="cldsx" />
-    <link rel="stylesheet" href="../../normalize.css">
-    <link rel="stylesheet" href="../../style.css">
-    <link rel="stylesheet" href="../../prettify.css">
+    <link rel="stylesheet" href="../../normalize.css" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="../../prettify.css" />
     <script src="../../prettify.js"></script>
-   
-</head>
+  </head>
 
-<body onload="prettyPrint()">
+  <body onload="prettyPrint()">
     <header>
-        <ul>
-            <li onclick='window.location.href="https://github.com/cldsx/notebook"'>笔记</li>
-            <li onclick='window.location.href="../../blog/index.html"'>小博客</li>
-            <li onclick='window.location.href="../../index.html"' class='active'>查询文档</li>
-            <!-- 预留零 -->
-            <!-- 预留一 -->
-            <!-- 预留二 -->
-            <!-- 预留三 -->
-            <!-- 预留四 -->
-            <li>
-                <input type="text" placeholder="search...">
-            </li>
-        </ul>
+      <ul>
+        <li onclick='window.location.href="https://github.com/cldsx/notebook"'>
+          笔记
+        </li>
+        <li onclick='window.location.href="../../blog/index.html"'>小博客</li>
+        <li onclick='window.location.href="../../index.html"' class="active">
+          查询文档
+        </li>
+        <!-- 预留零 -->
+        <!-- 预留一 -->
+        <!-- 预留二 -->
+        <!-- 预留三 -->
+        <!-- 预留四 -->
+        <li>
+          <input type="text" placeholder="search..." />
+        </li>
+      </ul>
     </header>
-    <em class='position'>当前位置：js基础知识</em>
+    <em class="position">当前位置：js基础知识</em>
     <section>
-        <div class="title">js中this指向问题</div>
-        <div class="block"> 对象内部方法的this指向调用这些方法的对象，也就是谁调用就指向谁。</div>
-        <pre class="code prettyprint">
+      <div class="title">js中this指向问题</div>
+      <div class="block">
+        对象内部方法的this指向调用这些方法的对象，也就是谁调用就指向谁。
+      </div>
+      <pre class="code prettyprint">
             let obj = {
                 name: "张三",
                 obj1: function () {
@@ -49,17 +56,18 @@
                 obj2: {
                     name: "张思",
                     obj2C: function () {
-                    name = "李武-";
-                    console.log(this.name);
+                        name = "李武-";
+                        console.log(this.name);
                     },
                 },
             };
             obj.obj1() //张三 this指向obj
             obj.obj2.obj2C() //张思 obj2C()中this指向obj2
-        </pre>
+        </pre
+      >
 
-        <div class="block">箭头函数作用域this不改变上下文</div>
-        <pre class="code prettyprint">
+      <div class="block">箭头函数作用域this不改变上下文</div>
+      <pre class="code prettyprint">
             var show = () => {
                 console.log(this)
               }
@@ -77,13 +85,55 @@
               showObj.show();//window
               showObj.show2();//showshow
         </pre>
-        
+        <div class="block">构造函数中的this是指向实例。</div>
+        <pre class="code prettyprint">
+            function Person(name, age, sex) {
+                this.name = name;
+                this.age = age;
+                this.sex = sex;
+                console.log(this);//this指向pp Person {name: '一啊啊', age: '18', sex: '女'}
+              }
+              var pp=new Person("一啊啊","18","女");
+              console.log(pp);//Person {name: '一啊啊', age: '18', sex: '女'}
+              
+        </pre>
+        <div class="block">改变this指向</div>
+        <pre class="code prettyprint">
+            function doit2(id, name, sex) {
+                this.id = id;
+                this.name = name;
+                this.sex = sex;
+              }
+              
+              function dododo(id, name, sex, height) {
+                this.height = height;
+                doit2.call(this, id, name, sex);
+                 console.log("dododo里的this",this);
+              }
+              var do1 = new dododo("01", "张阿斯", "女", "165");
+              //打印结果
+              //dododo里的this dododo {height: '165', id: '01', name: '张阿斯', sex: '女'}
+        </pre>
+        <div class="block">等同于</div>
+        <pre class="code prettyprint">
 
+            function doit2(id, name, sex) {
+                this.id = id;
+                this.name = name;
+                this.sex = sex;
+              }
+              
+              function dododo(id, name, sex, height) {
+                this.height = height;
+              }
+              var do1 = new dododo("01", "张阿斯", "女", "165");
+              doit2.call(do1,"02","张阿空","女")
+              console.log(do1);
+              //打印结果
+              //dododo {height: '165', id: '02', name: '张阿空', sex: '女'}
+        </pre>
     </section>
 
-    <footer>
-        cldsx &copy;2023
-    </footer>
-</body>
-
+    <footer>cldsx &copy;2023</footer>
+  </body>
 </html>
